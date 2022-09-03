@@ -1,0 +1,179 @@
+[
+    {
+        "id": "aa059a0184233657",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "bc49f5b57338733d",
+        "type": "mqtt in",
+        "z": "aa059a0184233657",
+        "name": "Subcribe to HiveMQ Cloud",
+        "topic": "spBv1.0/Ambulance/DDATA/MyRaspberryPi",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "3840be07c4b76d36",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 130,
+        "y": 180,
+        "wires": [
+            [
+                "3385a64e8d79cb7a",
+                "0d7c4a2dace7151e"
+            ]
+        ]
+    },
+    {
+        "id": "cba1aec9fc268071",
+        "type": "decode",
+        "z": "aa059a0184233657",
+        "name": "sparkplug_b decoder",
+        "protofile": "7ae6addec2bb7b16",
+        "protoType": "Payload",
+        "x": 460,
+        "y": 80,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "3385a64e8d79cb7a",
+        "type": "function",
+        "z": "aa059a0184233657",
+        "name": "prepare messages",
+        "func": "msg.payload = msg.payload;\nreturn msg;",
+        "outputs": 2,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 130,
+        "y": 280,
+        "wires": [
+            [
+                "224d91efd91ce524"
+            ],
+            [
+                "0d7c4a2dace7151e"
+            ]
+        ]
+    },
+    {
+        "id": "224d91efd91ce524",
+        "type": "ui_gauge",
+        "z": "aa059a0184233657",
+        "name": "Display Temperature",
+        "group": "d15732077fef0952",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "BPM",
+        "label": "units",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "200",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "className": "",
+        "x": 420,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "0d7c4a2dace7151e",
+        "type": "debug",
+        "z": "aa059a0184233657",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 380,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "3840be07c4b76d36",
+        "type": "mqtt-broker",
+        "name": "HiveMQ Cloud",
+        "broker": "1384b0c877074ab8bb5451a1671a8042.s2.eu.hivemq.cloud ",
+        "port": "8883",
+        "tls": "835a16c8e960c978",
+        "clientid": "MyDemoGreenhouse2021Subcriber",
+        "autoConnect": true,
+        "usetls": true,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "2",
+        "birthRetain": "true",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "7ae6addec2bb7b16",
+        "type": "protobuf-file",
+        "protopath": "/home/akula/Downloads/tahu-master/sparkplug_b/sparkplug_b.proto",
+        "watchFile": true
+    },
+    {
+        "id": "d15732077fef0952",
+        "type": "ui_group",
+        "name": "Ambulance ",
+        "tab": "b5e46b6c1161506c",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "835a16c8e960c978",
+        "type": "tls-config",
+        "name": "",
+        "cert": "",
+        "key": "",
+        "ca": "",
+        "certname": "",
+        "keyname": "",
+        "caname": "",
+        "servername": "",
+        "verifyservercert": true,
+        "alpnprotocol": ""
+    },
+    {
+        "id": "b5e46b6c1161506c",
+        "type": "ui_tab",
+        "name": "Home",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    }
+]

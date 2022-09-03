@@ -1,0 +1,228 @@
+[
+    {
+        "id": "454dd4143cd9f655",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "1064401509f4fcd5",
+        "type": "function",
+        "z": "454dd4143cd9f655",
+        "name": "prepare sparkplug B Message",
+        "func": "msg.payload = msg.payload;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 330,
+        "y": 180,
+        "wires": [
+            [
+                "7119227e484e333f",
+                "adaf74c38ce8435e"
+            ]
+        ]
+    },
+    {
+        "id": "adaf74c38ce8435e",
+        "type": "mqtt out",
+        "z": "454dd4143cd9f655",
+        "name": "Publish to HiveMQ cloud",
+        "topic": "spBv1.0/Ambulance/DDATA/MyRaspberryPi",
+        "qos": "2",
+        "retain": "true",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "917b2821dbe4d40b",
+        "x": 610,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "ce793171b15da526",
+        "type": "encode",
+        "z": "454dd4143cd9f655",
+        "name": "sparkplug_b encoder",
+        "protofile": "89f43a0764a46d13",
+        "protoType": "Payload",
+        "x": 180,
+        "y": 300,
+        "wires": [
+            [
+                "15d063ccbc5fdab3"
+            ]
+        ]
+    },
+    {
+        "id": "7119227e484e333f",
+        "type": "debug",
+        "z": "454dd4143cd9f655",
+        "name": "msgs",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 550,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "15d063ccbc5fdab3",
+        "type": "debug",
+        "z": "454dd4143cd9f655",
+        "name": "debug 1",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 460,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "df9fc832e508fea6",
+        "type": "ui_gauge",
+        "z": "454dd4143cd9f655",
+        "name": "",
+        "group": "80d205ca8c91d7c5",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "gauge",
+        "label": "units",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "1024",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "className": "",
+        "x": 350,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "2c6d646393dfcd1b",
+        "type": "serial in",
+        "z": "454dd4143cd9f655",
+        "name": "Arduino nano",
+        "serial": "058b256764948541",
+        "x": 150,
+        "y": 120,
+        "wires": [
+            [
+                "df9fc832e508fea6",
+                "1064401509f4fcd5"
+            ]
+        ]
+    },
+    {
+        "id": "917b2821dbe4d40b",
+        "type": "mqtt-broker",
+        "name": "Hive MQ cloud",
+        "broker": "1384b0c877074ab8bb5451a1671a8042.s2.eu.hivemq.cloud",
+        "port": "8883",
+        "tls": "835a16c8e960c978",
+        "clientid": "MyDemoGreenhouse2021",
+        "autoConnect": true,
+        "usetls": true,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "2",
+        "birthRetain": "true",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "2",
+        "closeRetain": "true",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "2",
+        "willRetain": "true",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "89f43a0764a46d13",
+        "type": "protobuf-file",
+        "protopath": "/home/akula/Desktop/sparkplug_b/sparkplug_b.proto",
+        "watchFile": true
+    },
+    {
+        "id": "80d205ca8c91d7c5",
+        "type": "ui_group",
+        "name": "Heart Rate",
+        "tab": "5544f8932028a1c0",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "058b256764948541",
+        "type": "serial-port",
+        "serialport": "/dev/ttyUSB0",
+        "serialbaud": "9600",
+        "databits": "8",
+        "parity": "none",
+        "stopbits": "1",
+        "waitfor": "",
+        "dtr": "none",
+        "rts": "none",
+        "cts": "none",
+        "dsr": "none",
+        "newline": "\\n",
+        "bin": "false",
+        "out": "char",
+        "addchar": "",
+        "responsetimeout": "10000"
+    },
+    {
+        "id": "835a16c8e960c978",
+        "type": "tls-config",
+        "name": "",
+        "cert": "",
+        "key": "",
+        "ca": "",
+        "certname": "",
+        "keyname": "",
+        "caname": "",
+        "servername": "",
+        "verifyservercert": true,
+        "alpnprotocol": ""
+    },
+    {
+        "id": "5544f8932028a1c0",
+        "type": "ui_tab",
+        "name": "Home",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    }
+]
